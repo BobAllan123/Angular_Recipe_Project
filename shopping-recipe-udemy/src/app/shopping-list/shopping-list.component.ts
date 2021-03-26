@@ -6,17 +6,17 @@ import { ShoppingListService } from './shopping-list.service';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css']
+  styleUrls: ['./shopping-list.component.css'],
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
-
   ingredients: Ingredient[];
   private igChangedSub: Subscription;
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService) {}
 
   ngOnInit() {
     this.ingredients = this.shoppingListService.getIngredients();
+    // tslint:disable-next-line: deprecation
     this.igChangedSub = this.shoppingListService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
@@ -28,8 +28,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.igChangedSub.unsubscribe();
   }
 
-  onEditItem(index : number) {
+  onEditItem(index: number) {
     this.shoppingListService.startedEditing.next(index);
   }
-
 }
